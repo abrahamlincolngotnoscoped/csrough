@@ -1,0 +1,108 @@
+INSERT INTO empl (empno, ename, job, hiredate, mgr, sal, comm, deptno)
+VALUES 
+(7369, 'Smith', 'Clerk', '1980-12-19', 7902, 800, NULL, 20),
+(7499, 'Allen', 'Salesman', '1981-02-20', 7698, 1600, 300, 30),
+(7521, 'Ward', 'Salesman', '1981-02-22', 7698, 1250, 500, 30),
+(7366, 'Jones', 'Manager', '1981-04-02', 7839, 2975, NULL, 20),
+(7654, 'Martin', 'Salesman', '1981-09-28', 7698, 1250, 1400, 30),
+(7698, 'Blake', 'Manager', '1981-05-01', 7839, 2850, NULL, 30),
+(7782, 'Clark', 'Manager', '1981-06-09', 7839, 2450, NULL, 10),
+(7782, 'Scott', 'Analyst', '1987-04-19', 7566, 3000, NULL, 20),
+(7839, 'King', 'President', '1981-11-17', NULL, 5000, NULL, 10),
+(7844, 'Turner', 'Salesman', '1981-09-08', 7698, 1500, 0, 30),
+(7876, 'Adams', 'Clerk', '1987-05-23', 7788, 1100, NULL, 20),
+(7900, 'James', 'Clerk', '1981-12-03', 7698, 950, NULL, 30),
+(7902, 'Ford', 'Analyst', '1981-12-03', 7566, 3000, NULL, 20),
+(7934, 'Miller', 'Clerk', '1982-01-23', 7782, 1300, NULL, 10);
+
+SELECT *
+FROM empl
+WHERE job = 'Manager';
+
+
+SELECT empno, ename
+FROM empl
+WHERE YEAR(hiredate) = 1981;
+
+
+
+SELECT ename
+FROM empl
+WHERE deptno = 20 AND sal > 1000;
+
+
+SELECT empno, ename, sal
+FROM empl
+WHERE sal < 1000 OR sal > 2000;
+
+
+SELECT ename
+FROM empl
+WHERE deptno IN (10, 20);
+
+
+SELECT *
+FROM empl
+WHERE ename LIKE '_A%';
+
+SELECT ename, job
+FROM empl
+WHERE job NOT LIKE '%a%';
+
+
+SELECT DISTINCT job
+FROM empl
+WHERE comm IS NOT NULL;
+
+
+SELECT ename
+FROM empl
+WHERE job = 'Salesman'
+ORDER BY ename ASC;
+
+
+SELECT ename, job, sal
+FROM empl
+WHERE deptno = 10
+ORDER BY sal ASC;
+
+
+SELECT MAX(hiredate) AS latest_hiredate, MIN(hiredate) AS oldest_hiredate
+FROM empl;
+
+
+SELECT COUNT(*) AS employee_count
+FROM empl
+WHERE mgr IS NOT NULL;
+
+
+SELECT SUM(sal) AS total_salary
+FROM empl
+WHERE deptno = 20;
+
+
+SELECT deptno, AVG(sal) AS avg_salary
+FROM empl
+GROUP BY deptno;
+
+
+SELECT deptno, COUNT(*) AS employee_count
+FROM empl
+GROUP BY deptno;
+
+SELECT job, MAX(sal) AS max_salary, MIN(sal) AS min_salary
+FROM empl
+GROUP BY job;
+
+
+SELECT deptno, AVG(sal) AS avg_salary
+FROM empl
+GROUP BY deptno
+HAVING AVG(sal) > 500;
+
+
+SELECT deptno, COUNT(*) AS employee_count
+FROM empl
+GROUP BY deptno
+HAVING COUNT(*) < 5;
+
